@@ -12,13 +12,13 @@
 	<% String id_check = (String)session.getAttribute("id");
 	if (id_check==null) {%>
 		alert("로그인 바랍니다.");
-		location.replace("/test3/login/login.jsp");
+		location.href='/test3/login/login.jsp';
 	<%} else if (session.getAttribute("dorm") == null) {%>
 		alert("로그인 바랍니다.");
-		location.replace("/test3/login/login.jsp");
+		location.href='/test3/login/login.jsp';
 	<%}
 	else{%>
-		location.replace("/test3/main.jsp");<%}%>
+		location.href='/test3/main.jsp';<%}%>
 		
 	</script>
 </body>

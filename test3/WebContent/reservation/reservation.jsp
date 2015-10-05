@@ -11,7 +11,7 @@
 <title>예약 정보 입력</title>
 
 </head>
-<body>
+<body style="background-color:#CEE3F6">
 
 	<h2>
 		<%
@@ -48,7 +48,7 @@
 					stmt = conn.createStatement();
 					String sql = "select * from reservation where rw_id = '"
 							+ rw_id + "' and r_dorm = '" + dorm + "'";
-
+					
 					rs = stmt.executeQuery(sql);
 				} catch (Exception e) {
 					
@@ -152,24 +152,24 @@
 
 			var hour_s_2 = hour_s + 2;		
 		
-			if ((year<years.getFullYear())||(((month < months.getMonth() + 1) && (month != 99)))
+			if ((year==years.getFullYear()&&(month < months.getMonth() + 1) && (month != 99))
 					||((month == months.getMonth() + 1) && (day < days.getDate())
-							&& (day != 99) && (month != 99))
+							&& (day != 99) && (month != 99)&&(year==years.getFullYear()))
 			
 					||((month == months.getMonth() + 1)
 							&& (day == days.getDate())
-							&& (hour_s < hours_s.getHours()) && (hour_s != 99))
+							&& (hour_s < hours_s.getHours()) && (hour_s != 99)&&(year==years.getFullYear()))
 
 					||((month == months.getMonth() + 1)
 							&& (day == days.getDate()) && (day != 99)
 							&& (hour_s == hours_s.getHours())
 							&& (minute_s <= minutes_s.getMinutes())
-							&& (day != 99) && (month != 99) && (minute_s != 99) && (hour_s != 99))
+							&& (day != 99) && (month != 99) && (minute_s != 99) && (hour_s != 99)&&(year==years.getFullYear()))
 
 					||(((hour_e < hour_s) || (hour_e - hour_s > 2))
 							&& (day != 99) && (month != 99) && (hour_s != 99)
-							&& (minute_s != 99) && (hour_e != 99))
-					||((minute_s != 99) && (hour_s != 99) && (hour_e == hour_s_2)&& (minute_e > minute_s) && (hour_e != 99) && (minute_e != 99))
+							&& (minute_s != 99) && (hour_e != 99)&&(year==years.getFullYear()))
+					||((minute_s != 99) &&(year==years.getFullYear())&& (hour_s != 99) && (hour_e == hour_s_2)&& (minute_e > minute_s) && (hour_e != 99) && (minute_e != 99))
 					|| ((month == 99) || (day == 99) || (hour_s == 99)|| (hour_e == 99) || (minute_s == 99) || (minute_e == 99))
 					||(((month==4)||(month==6)||(month==9)||(month==11))&& (day==31) && (day != 99) && (month != 99))
 					||((((year%4!=0)&&(day==29))||(year%4==0))&&(month==2)&&((day==30)||(day==31))&&(day!=99)&&(month!=99))){
@@ -191,7 +191,8 @@
 			<p>예약 날짜</p>
 			<select name="year" onchange="constratints(form)">
 				<%
-					int year = 2015;
+					String inDate= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+					int year = Integer.parseInt(inDate);
 					for(int i =year; i<=year+1;i++){
 				%>
 				<option value="<%=i%> " ><%=i%>년</option>
@@ -234,7 +235,7 @@
 				<option value="0"><%="00"%> 분
 				</option>
 				<%
-					for (int i = 10; i <= 59; i = i + 10) {
+				for (int i = 1; i <= 59; i++) {// for (int i = 10; i <= 59; i = i + 10)
 				%>
 				<option value="<%=i%>"><%=i%> 분
 				</option>
@@ -259,7 +260,7 @@
 				<option value="0"><%="00"%> 분
 				</option>
 				<%
-					for (int i = 10; i <= 59; i = i + 10) {
+				for(int i = 1; i <= 59; i++) { //for(int i = 10; i <= 59; i = i + 10)
 				%>
 				<option value="<%=i%>"><%=i%> 분
 				</option>

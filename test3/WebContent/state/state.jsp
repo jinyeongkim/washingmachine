@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세탁기 상태</title>
 </head>
-<body>
+<body style="background-color:#CEE3F6">
 <center>
-	<p align = "right"> <%=(String)session.getAttribute("dorm") %> 세탁기 상태</p>
+	<p align = "right"> <%=(String)session.getAttribute("dorm") %>  세탁기 상태</p> 
 	<table border="2" align="right">
 	<tr>
 		<td align ="center"> 세탁기 번호</td>
 		<td align ="center"> 세탁기 상태</td>
+		<td align ="center"> 기숙사</td>
 			</tr>
 	<%
 		Connection conn = null;
@@ -27,7 +28,7 @@
 		conn = DriverManager.getConnection(jdbcurl,"root","root");
 		stmt = conn.createStatement();
 	
-		String sql = "select * from washingmachine where w_dorm = '"+dorm+"'";
+		String sql = "select * from washingmachine where w_dorm='"+dorm+"'"; //where w_dorm = '"+dorm+"'
 		rs = stmt.executeQuery(sql);
 		}
 		catch(Exception e){
@@ -38,6 +39,7 @@
 		<tr>
 			<td align = "center"><%= rs.getString("w_id")%></td>	
 			<td align = "center"><%= rs.getString("state")%></td>
+			<td align = "center"><%= rs.getString("w_dorm")%></td> 
 		</tr>
 		<%
 		}

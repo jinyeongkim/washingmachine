@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>예약목록</title>
 </head>
-<body>
+<body style="background-color:#CEE3F6">
 	<center>
 	<p align = "right"> 예약 목록</p>
 	<table border="2" align="right">

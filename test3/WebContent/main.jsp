@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>예약||취소하기</title>
 </head>
-<body>
+<body style="background-color: #CEE3F6">
 	<script type="text/javascript">
 		function constraint_count() {
-		<%Connection conn = null;
+	<%Connection conn = null;
 			Statement stmt = null;
 			ResultSet rs = null;
 
@@ -24,26 +24,33 @@
 				String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
 				conn = DriverManager.getConnection(jdbcurl, "root", "root");
 				stmt = conn.createStatement();
-				rs = stmt
-						.executeQuery("select count(*) from reservation where ru_id ='"
-								+ id + "'");
+				rs = stmt.executeQuery("select balance from user where u_id ='"
+						+ id + "'");
 			} catch (Exception e) {
 				out.println("DB 연동 오류입니다. : " + e.getMessage());
 			}
+			
+			
+			rs.next();
+			if (rs.getInt(1) == 0) {%>
+			alert("잔액이 부족합니다. 새 카드를 구매하시길 바랍니다.");
+	<%}
+			else{
+			rs = stmt
+					.executeQuery("select count(*) from reservation where ru_id ='"
+							+ id + "'");
 			rs.next();
 			if (rs.getInt(1) == 0) {
-				if (dorm.equals("예지원")) {%>
-		location.href = '/test3/dormitory/yejiwon_selecting_machine.jsp';
-	<%} else if (dorm.equals("의암관")) {%>
-		location.href = '/test3/dormitory/uiamgwan_selecting_machine.jsp';
-	<%} else if (dorm.equals("한서관")) {%>
-		location.href = '/test3/dormitory/hanseogwan_selecting_machine.jsp';
-	<%} else if (dorm.equals("율곡관")) {%>
-		location.href = '/test3/dormitory/yulgokgwan_selecting_machine.jsp';
+				if (dorm.equals("w")) {%>
+		location.href = '/test3/dormitory/w_selecting_machine.jsp';
+	<%} else if (dorm.equals("m")) {%>
+		location.href = '/test3/dormitory/m_selecting_machine.jsp';
 	<%}
 			} else if (rs.getInt(1) != 0) {%>
 		alert("이미 예약 내역이 있습니다.다른 예약을 원하신다면 예약 취소 후에 이용해주시길 바랍니다.");
-	<%}
+	<%}}
+
+			
 
 			stmt.close();
 			conn.close();%>
@@ -93,7 +100,7 @@
 					<td align="center">예약 종료 시간</td>
 				</tr>
 				<%
-				request.setCharacterEncoding("UTF-8");
+					request.setCharacterEncoding("UTF-8");
 					try {
 						Class.forName("com.mysql.jdbc.Driver");
 						String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
@@ -119,6 +126,16 @@
 				%>
 			</table>
 			<%
+			String inDate   = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
+			String inTime  = new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
+			PreparedStatement pstmt = null;
+				pstmt = conn.prepareStatement("delete from reservation where end_time< ? and r_date <=?");
+				pstmt.setString(1,inTime);
+				pstmt.setString(2,inDate);
+				
+				pstmt.executeUpdate();
+				pstmt.close();
+			
 				stmt.close();
 				conn.close();
 			%>

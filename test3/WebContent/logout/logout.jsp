@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:#CEE3F6">
 <script>
 	<%session.removeAttribute("id");
 	session.removeAttribute("dorm");

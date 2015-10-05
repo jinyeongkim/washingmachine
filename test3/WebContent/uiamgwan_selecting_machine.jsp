@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세탁기 선택하기</title>
 </head>
-<body>
+<body style="background-color:#CEE3F6">
 <h2><%out.print((String)session.getAttribute("dorm")); %></h2>
 <center>
 <p align = "right"> 예약자 목록 </p>
@@ -129,8 +129,7 @@ function choose(check){
 
 </script>
 
-
-<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post"   onsubmit="javascript:return choose('check')">
+<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post"  onsubmit="javascript:return choose('check')" >
 
 	<div align="left">	
 	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
@@ -138,8 +137,29 @@ function choose(check){
 	<p>세탁기1 </p>
 	</div>
 	
-<div> <input type = "submit" value = "확인" align = "right" > </div>
-</form>
+	<div align="left">	
+	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
 
+	<input type = "radio" name = "check"value ="2" align="left" >
+	<p>세탁기2 </p>
+	</div>
+	
+	<div align="left">	
+	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
+
+	<input type ="radio" name = "check" value ="3"align="left" >
+	<p>세탁기3 </p>
+	</div>
+	
+	<div align="left">	
+	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
+
+	<input type ="radio" name = "check" value ="4"align="left"  >
+	<p>세탁기4 </p>
+	</div>
+	
+<div>
+<input type = "submit" value = "확인" align = "right" > </div>
+</form>
 </body>
 </html>
