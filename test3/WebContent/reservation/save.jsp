@@ -9,9 +9,75 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나의 예약 정보</title>
+<style type="text/css">
+
+
+#fontfamily{
+	font-family: HY엽서M;
+	}
+table {border-collapse: collapse;
+border: 2px solid #4D6BE6;  /*line color*/
+font: normal 80%/140% arial, helvetica, sans-serif;
+color: #fff; /* top word's color*/
+background: #0040FF;}  /*first attribute's list color*/
+
+td, th {border: 1px dotted #bbb;
+padding: .5em;}
+
+caption {padding: 0 0 .5em 0;
+text-align: left;
+font-size: 1.4em;
+font-weight: bold;
+text-transform: uppercase;
+color: #FB1B8B;
+background: transparent;}
+
+/* =links
+----------------------------------------------- */
+
+table a {padding: 1px;
+text-decoration: none;
+font-weight: bold;
+background: transparent;}
+
+table a:link {border-bottom: 1px dashed #ddd;
+color: #FB1B8B;}
+
+table a:visited {border-bottom: 1px dashed #ccc;
+text-decoration: line-through;
+color: #FB1B8B;}
+
+table a:hover {border-bottom: 1px dashed #bbb;
+color: #FB1B8B;}
+
+/* =head =foot
+----------------------------------------------- */
+
+thead th, tfoot th {border: 2px solid #000;
+text-align: left;
+font-size: 1.2em;
+font-weight: bold;
+color: #289FDB;
+background: transparent;}
+
+tfoot td {border: 2px solid #FB1B8B;}
+
+/* =body
+----------------------------------------------- */
+/*
+tbody th, tbody td {vertical-align: top;
+text-align: left;}
+
+tbody th {white-space: nowrap;}
+
+.odd {background: #fff;}
+
+tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
+</style>
+
 </head>
-<body style="background-color: #CEE3F6">
-	<h2>
+<body style="background-color: #9BBAD8 ">
+	<h2  id="fontfamily">
 
 		<%
 			out.print((String) session.getAttribute("dorm"));
@@ -26,7 +92,8 @@
 	request.setCharacterEncoding("UTF-8");
 	int rw_id = Integer.parseInt((String)request.getParameter("machine_num"));
 	String dorm = (String) session.getAttribute("dorm");
-	String date2 = String.valueOf("2015"+"-"+ request.getParameter("month") + "-" + request.getParameter("day"));
+	String year = request.getParameter("year");
+	String date2 = String.valueOf(year.trim()+"-"+ request.getParameter("month") + "-" + request.getParameter("day"));
 	String start_time = String.valueOf(request.getParameter("start_time_h")+ ":"+ request.getParameter("start_time_m"));
 	String end_time = String.valueOf(request.getParameter("end_time_h")
 			+ ":" + request.getParameter("end_time_m"));
@@ -106,13 +173,13 @@
 
 
 	<center>
-		<p>나의 예약정보</p>
-		<table border="2" align="center">
+		<p id="fontfamily">나의 예약정보</p>
+		<table  id="fontfamily"border="2" align="center">
 			<tr>
-				<td align="center">세탁기 번호</td>
-				<td align="center">예약 날짜</td>
-				<td align="center">예약 시작 시간</td>
-				<td align="center">예약 종료 시간</td>
+				<td  id="fontfamily"align="center">세탁기 번호</td>
+				<td  id="fontfamily"align="center">예약 날짜</td>
+				<td  id="fontfamily"align="center">예약 시작 시간</td>
+				<td  id="fontfamily"align="center">예약 종료 시간</td>
 			</tr>
 			<%
 				
@@ -128,10 +195,10 @@
 			%>
 
 			<tr>
-				<td align="center"><%=rs.getString("rw_id")%></td>
-				<td align="center"><%=rs.getString("r_date")%></td>
-				<td align="center"><%=rs.getString("start_time")%></td>
-				<td align="center"><%=rs.getString("end_time")%></td>
+				<td id="fontfamily" align="center"><%=rs.getString("rw_id")%></td>
+				<td id="fontfamily" align="center"><%=rs.getString("r_date")%></td>
+				<td  id="fontfamily"align="center"><%=rs.getString("start_time")%></td>
+				<td  id="fontfamily"align="center"><%=rs.getString("end_time")%></td>
 			</tr>
 
 			<%}
@@ -158,7 +225,7 @@
 			conn.close();
 		%>
 
-	<input type="button" onclick="window.location='/test3/main.jsp'"
+	<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'"
 		value="예약완료  ^_^" align="top">
 
 

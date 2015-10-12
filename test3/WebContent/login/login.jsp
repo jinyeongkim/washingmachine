@@ -16,6 +16,11 @@
 
 #footer{width:1000px; float:left;}
 
+#fontfamily{
+	font-family: HY엽서M,고딕, 돋움,  맑은고딕,AR DESTINE중간;
+	}
+	
+	
 </style>
 
 <!--wrap - 레이아웃 전체를 묶어서 wrap안에 있는 div들이 깨지지 않고 자리를 잘 잡게 하기 위한 테두리이다.-->
@@ -29,26 +34,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
 </head>
-<body style="background-color:#CEE3F6;border-color:red;font-face:굴림;font-size:9pt;">
+<body style="background-color:#9BBAD8;border-color:red; ;font-size:9pt;">
 
 
 
 <div class="header">
-<img src="/test3/colorwashingmachine.jpg" width="150" height="150" align="middle" >
+	<img src="/test3/colorwashing.jpg" width="150" height="150" align="middle" >
  </div>
 <div class = "header" align = "justify">
 <form name = "selection" action="login_result.jsp" method= "post" >
 
-<p> id</p>
+<p id="fontfamily"> id</p>
 <input type = "text" name = "id" id = "id">
 
-<p> password</p>
+<p id="fontfamily" > password</p>
 <input type = "password" name = "password" id="id">
 
-<input type = "submit" value = "로그인" >
+<input type = "submit" style="background-color:#F0F0F0; color:#5D5B54 " value = "로그인" id="fontfamily" >
 </form>
 
-<input type = "button" name = "가입하러가기" onclick = "window.location.href = '/test3/signup/signUp.jsp'" value = "회원가입" >
+<input type = "button" style="background-color:#F0F0F0; color:#5D5B54"  id="fontfamily" name = "가입하러가기" onclick = "window.location.href = '/test3/signup/signUp.jsp'" value = "회원가입" >
 </div>
 </body>
 </html>

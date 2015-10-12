@@ -5,21 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
+
+<style type="text/css">
+
+#fontfamily{
+	font-family: HY엽서M;
+	
+	}
+</style>
 </head>
-<body style="background-color:#CEE3F6"><h2>회원가입</h2>
+
+<body style="background-color:#9BBAD8"><h2 id="fontfamily" style = "color:#086A87" >회원가입</h2>
 
 	<div style="left: 20px;">
 
 		<form name="signUp" action="/test3/signup/signUpFinish.jsp" method="post">
-			<p>아이디</p>
+			<p id="fontfamily" >아이디</p>
 			<input type="text" name="id" id="id" maxlength="9"> 
-			<p>비밀번호</p>
+			<p id="fontfamily">비밀번호</p>
 			<input type="password" name="password" id="password" maxlength="15">
-			<p>비밀번호 확인</p>
+			<p id="fontfamily">비밀번호 확인</p>
 			<input type="password" name="password_check" id="password_check" maxlength="15">
-			<p>휴대전화</p>
+			<p id="fontfamily">휴대전화</p>
 			<input type="text" name="phone" id="form" maxlength="11">
-			<p>카드번호</p>
+			<p id="fontfamily">카드번호</p>
 			<input type="text" name="card" id="card" maxlength="15">
 		<!--	<p>충전 금액</p>
 		  	<select name="balance" >
@@ -29,12 +38,12 @@
 				<option value="<%="5000"%>"><%=5000 %></option>
 				<option value="<%="10000"%>"><%=10000 %></option>
 			</select>-->
-			<p>기숙사</p>
-			<select name="dorm">
-				<option value=99>기숙사</option>
+			<p id="fontfamily">기숙사</p>
+			<select name="dorm" id="fontfamily">
+				<option value=99 >기숙사</option>
 				<option value="<%="w"%>">w</option>
 				<option value="<%="m"%>">m</option>
-			</select> <input type="submit" value="가입하기">
+			</select> <input type="submit" value="가입하기" id="fontfamily">
 		</form>
 	</div>
 	</body>

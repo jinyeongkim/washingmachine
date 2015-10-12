@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
         <%@ page import = "java.sql.*" %>
       <%@page import = "java.util.*"%>
@@ -6,11 +6,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<body style="background-color:#CEE3F6">
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>취소하기</title>
 </head>
-<body>
+<body style="background-color:#9BBAD8">
+
+
 <center>
 	<p align = "right"> 나의 예약정보</p>
 	<table border="2" align="right">

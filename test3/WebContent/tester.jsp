@@ -6,6 +6,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세탁기 상태</title>
+<style type="text/css">
+
+#st-header{
+
+padding:20px;
+margin-bottom: 20px;
+border: 1ps solid #bcbcbc;
+}
+
+
+#jb-sidebarleft{
+
+width:160px;
+padding: 20px;
+margin-right:20px;
+margin-bottom:20px;
+float : left;
+border:1px solid #fff;
+}
+
+#jb-db{
+width:160px;
+padding: 20px;
+margin-right:20px;
+margin-bottom:20px;
+float : left;
+border:1px solid #fff;
+}
+
+
+</style>
+
+
+
+
 </head>
 <body style="background-color:#CEE3F6">
 <center>

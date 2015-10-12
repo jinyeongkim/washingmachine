@@ -6,18 +6,106 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세탁기 선택하기</title>
+<style type="text/css">
+
+#fontfamily{
+	font-family: HY엽서M;
+	}
+	table {border-collapse: collapse;
+border: 2px solid #4D6BE6;  /*line color*/
+font: normal 80%/140% arial, helvetica, sans-serif;
+color: #fff; /* top word's color*/
+background: #0040FF;}  /*first attribute's list color*/
+
+td, th {border: 1px dotted #bbb;
+padding: .5em;}
+
+caption {padding: 0 0 .5em 0;
+text-align: left;
+font-size: 1.4em;
+font-weight: bold;
+text-transform: uppercase;
+color: #FB1B8B;
+background: transparent;}
+
+/* =links
+----------------------------------------------- */
+
+table a {padding: 1px;
+text-decoration: none;
+font-weight: bold;
+background: transparent;}
+
+table a:link {border-bottom: 1px dashed #ddd;
+color: #FB1B8B;}
+
+table a:visited {border-bottom: 1px dashed #ccc;
+text-decoration: line-through;
+color: #FB1B8B;}
+
+table a:hover {border-bottom: 1px dashed #bbb;
+color: #FB1B8B;}
+
+/* =head =foot
+----------------------------------------------- */
+
+thead th, tfoot th {border: 2px solid #000;
+text-align: left;
+font-size: 1.2em;
+font-weight: bold;
+color: #289FDB;
+background: transparent;}
+
+tfoot td {border: 2px solid #FB1B8B;}
+
+/* =body
+----------------------------------------------- */
+/*
+tbody th, tbody td {vertical-align: top;
+text-align: left;}
+
+tbody th {white-space: nowrap;}
+
+.odd {background: #fff;}
+
+tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
+
+#jb-header {
+	width: 270px;
+	float: top;
+}
+
+#jb-sidebarleft {
+	width: 100px;
+	padding: 5px;
+	margin-right: 5px;
+	float: left;
+
+}
+
+#jb-sidebarright {
+	width: 160px;
+	margin-right: 5px;
+	float: left;
+}
+
+
+</style>
+
+
 </head>
-<body style="background-color:#CEE3F6">
-<h2><%out.print((String)session.getAttribute("dorm")); %></h2>
-<center>
-<p align = "right"> 예약자 목록 </p>
-<table border="2" align="right">
+<body style="background-color:#9BBAD8">
+<h2 id="fontfamily"><%out.print((String)session.getAttribute("dorm")); %></h2>
+
+<div id = "jb-header">
+<p id="fontfamily"  align = "right"> 예약자 목록 </p>
+<table id="fontfamily" border="2" align="right">
 	<tr>
-	<td align ="center"> 세탁기 번호</td>
-	<td align ="center"> 예약 날짜</td>
-		<td align ="center"> 예약 시작 시간</td>
-		<td align ="center"> 예약 종료 시간</td>
-		<td align ="center"> 기숙사</td>
+	<td  id="fontfamily"align ="center">세탁기 번호</td>
+	<td id="fontfamily" align ="center">예약 날짜</td>
+		<td  id="fontfamily"align ="center">시작 시간</td>
+		<td  id="fontfamily"align ="center">종료 시간</td>
+		<td id="fontfamily" align ="center">건물</td>
 	</tr>
 	<%
 	request.setCharacterEncoding("UTF-8");
@@ -26,8 +114,6 @@
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
-		out.print(dorm);
 		
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -47,11 +133,11 @@
 			
 		%>
 		<tr>
-			<td align = "center"><%=rs.getString("rw_id")%></td>
-			<td align = "center"><%=rs.getString("r_date")%></td>	
-			<td align = "center"><%= rs.getString("start_time") %> </td>
-			<td align = "center"><%= rs.getString("end_time") %></td>
-			<td align = "center"><%= rs.getString("r_dorm") %></td>
+			<td id="fontfamily" align = "center"><%=rs.getString("rw_id")%></td>
+			<td id="fontfamily" align = "center"><%=rs.getString("r_date")%></td>	
+			<td  id="fontfamily"align = "center"><%= rs.getString("start_time") %> </td>
+			<td  id="fontfamily"align = "center"><%= rs.getString("end_time") %></td>
+			<td  id="fontfamily"align = "center"><%= rs.getString("r_dorm") %></td>
 		</tr>
 		<%
 		}
@@ -62,16 +148,34 @@
 			stmt.close();
 			conn.close();
 			%>
-			</center>
+		</div>
+<div id="jb-sidebarleft">
+<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post" 
+onsubmit="javascript:return choose('check')">
 
+	<div align="left">	
+	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="100" height="100" align="top" > 
+	<input type = "radio" name = "check" value ="1"align="left" >
+	<p id="fontfamily">세탁기1 </p>
+	</div>
+	
+	<div align="left">	
+	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="100" height="100" align="top" > 
 
-<center >
-<br><br><br><br><br><br>
-	<p align = "right"> <%=(String)session.getAttribute("dorm") %> 세탁기 상태</p>
-	<table border="2" align="right">
+	<input type = "radio" name = "check"value ="2" align="left" >
+	<p id="fontfamily">세탁기2 </p>
+	</div>
+	
+	<input type = "submit" value = "확인" align = "middle" id="fontfamily" >
+</form>
+
+</div>
+<div id = "jb-sidebarright">
+	<p  id="fontfamily"align = "center"> <%=(String)session.getAttribute("dorm") %> 세탁기 상태</p>
+	<table border="2" align="center">
 	<tr>
-		<td align ="center"> 세탁기 번호</td>
-		<td align ="center"> 세탁기 상태</td>
+		<td id="fontfamily" align ="center"> 세탁기 번호</td>
+		<td  id="fontfamily"align ="center"> 상태</td>
 			</tr>
 	<%	
 	request.setCharacterEncoding("UTF-8");
@@ -93,8 +197,8 @@
 		%>
 		
 		<tr>
-			<td align = "center"><%= rs.getString("w_id")%></td>	
-			<td align = "center"><%= rs.getString("state")%></td>
+			<td  id="fontfamily" align = "center"><%= rs.getString("w_id")%></td>	
+			<td  id="fontfamily" align = "center"><%= rs.getString("state")%></td>
 		</tr>
 			<%
 				}
@@ -104,9 +208,7 @@
 			stmt.close();
 			conn.close();
 		%>
-		</center>
-
-
+</div>
 <script type = "text/javascript"> 
 function choose(check){
 	var radio = document.all(check);
@@ -132,23 +234,5 @@ function choose(check){
 </script>
 
 
-<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post" 
-onsubmit="javascript:return choose('check')">
-
-	<div align="left">	
-	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
-	<input type = "radio" name = "check" value ="1"align="left" >
-	<p>세탁기1 </p>
-	</div>
-	
-	<div align="left">	
-	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
-
-	<input type = "radio" name = "check"value ="2" align="left" >
-	<p>세탁기2 </p>
-	</div>
-	
-<div><input type = "submit" value = "확인" align = "right" > </div>
-</form>
 </body>
 </html>

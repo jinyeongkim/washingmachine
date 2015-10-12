@@ -8,22 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:#9BBAD8">
 <%
-		
-		
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		
-
-	
-		
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		
-		
 		
 		if(id.equals("")){
 			%><script>alert("아이디를 입력하세요.");

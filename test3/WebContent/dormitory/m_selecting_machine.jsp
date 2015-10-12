@@ -1,100 +1,221 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-     pageEncoding="UTF-8"%>
-    <%@ page import = "java.sql.*" %>
+	pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세탁기 선택하기</title>
+<style type="text/css">
+#fontfamily {
+	font-family: HY엽서M, 돋움;
+}
+
+table {
+	border-collapse: collapse;
+	border: 2px solid #4D6BE6; /*line color*/
+	font: normal 80%/140% arial, helvetica, sans-serif;
+	color: #fff; /* top word's color*/
+	background: #0040FF;
+} /*first attribute's list color*/
+td,th {
+	border: 1px dotted #bbb;
+	padding: .5em;
+}
+
+caption {
+	padding: 0 0 .5em 0;
+	text-align: left;
+	font-size: 1.4em;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #FB1B8B;
+	background: transparent;
+}
+
+/* =links
+----------------------------------------------- */
+table a {
+	padding: 1px;
+	text-decoration: none;
+	font-weight: bold;
+	background: transparent;
+}
+
+table a:link {
+	border-bottom: 1px dashed #ddd;
+	color: #FB1B8B;
+}
+
+table a:visited {
+	border-bottom: 1px dashed #ccc;
+	text-decoration: line-through;
+	color: #FB1B8B;
+}
+
+table a:hover {
+	border-bottom: 1px dashed #bbb;
+	color: #FB1B8B;
+}
+
+/* =head =foot
+----------------------------------------------- */
+thead th,tfoot th {
+	border: 2px solid #000;
+	text-align: left;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #289FDB;
+	background: transparent;
+}
+
+tfoot td {
+	border: 2px solid #FB1B8B;
+}
+
+/* =body
+----------------------------------------------- */
+/*
+tbody th, tbody td {vertical-align: top;
+text-align: left;}
+
+tbody th {white-space: nowrap;}
+
+.odd {background: #fff;}
+
+tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
+#jb-header {
+	width: 270px;
+	float: top;
+	border: 3px solid #bcbcbc;
+}
+
+#jb-sidebarleft {
+	width: 100px;
+	padding: 5px;
+	margin-right: 5px;
+	float: left;
+	border: 1px solid #fff;
+}
+
+#jb-sidebarright {
+	width: 155px;
+	margin-right: 5px;
+	float: left;
+	border: 1px solid #fff;
+}
+
+</style>
+
 </head>
-<body style="background-color:#CEE3F6">
-<h2><%out.print((String)session.getAttribute("dorm")); %></h2>
-<center>
-<p align = "right"> 예약자 목록 </p>
-<table border="2" align="right">
-	<tr>
-	<td align ="center"> 세탁기 번호</td>
-	<td align ="center"> 예약 날짜</td>
-		<td align ="center"> 예약 시작 시간</td>
-		<td align ="center"> 예약 종료 시간</td>
-		<td align ="center"> 기숙사</td>
-	</tr>
-	<%
-	request.setCharacterEncoding("UTF-8");
-		String dorm = (String)session.getAttribute("dorm");
-		
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
-		out.print(dorm);
-		
-		try{
-		Class.forName("com.mysql.jdbc.Driver");
-		String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
-		conn = DriverManager.getConnection(jdbcurl,"root","root");
-		stmt = conn.createStatement();
-		rs =stmt.executeQuery("select * from reservation where r_dorm ='"+dorm+"'");
-		
-		}
-		catch(Exception e){
-			out.println("DB 연동 오류입니다. : "+e.getMessage());
-		
-		}
-		
-		if(rs!=null){
-		while(rs.next()){	
-			
+<body style="background-color: #9BBAD8">
+
+	<div id="jb-header">
+		<h2 id="fontfamly">
+			<%
+			out.print((String) session.getAttribute("dorm"));
 		%>
-		<tr>
-			<td align = "center"><%=rs.getString("rw_id")%></td>
-			<td align = "center"><%=rs.getString("r_date")%></td>	
-			<td align = "center"><%= rs.getString("start_time") %> </td>
-			<td align = "center"><%= rs.getString("end_time") %></td>
-			<td align = "center"><%= rs.getString("r_dorm") %></td>
-		</tr>
-		<%
-		}
-		}
-		%>	
-	</table>
+		</h2>
+		<p align="center" id="fontfamly">예약자 목록</p>
+		<table id="fontfamly" border="2" align="center">
+			<tr>
+				<td align="center" id="fontfamly">세탁기 번호</td>
+				<td align="center" id="fontfamly">예약 날짜</td>
+				<td align="center" id="fontfamly">시작 시간</td>
+				<td align="center" id="fontfamly">종료 시간</td>
+				<td align="center" id="fontfamly">건물</td>
+			</tr>
+			<%
+				request.setCharacterEncoding("UTF-8");
+				String dorm = (String) session.getAttribute("dorm");
+
+				Connection conn = null;
+				Statement stmt = null;
+				ResultSet rs = null;
+
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
+					conn = DriverManager.getConnection(jdbcurl, "root", "root");
+					stmt = conn.createStatement();
+					rs = stmt
+							.executeQuery("select * from reservation where r_dorm ='"
+									+ dorm + "'");
+
+				} catch (Exception e) {
+					out.println("DB 연동 오류입니다. : " + e.getMessage());
+
+				}
+
+				if (rs != null) {
+					while (rs.next()) {
+			%>
+			<tr>
+				<td align="center" id="fontfamly"><%=rs.getString("rw_id")%></td>
+				<td align="center" id="fontfamly"><%=rs.getString("r_date")%></td>
+				<td align="center" id="fontfamly"><%=rs.getString("start_time")%>
+				</td>
+				<td align="center" id="fontfamly"><%=rs.getString("end_time")%></td>
+				<td align="center" id="fontfamly"><%=rs.getString("r_dorm")%></td>
+			</tr>
+			<%
+				}
+				}
+			%>
+		</table>
 		<%
 			stmt.close();
 			conn.close();
-			%>
-			</center>
-
-<center >
-<br><br><br><br><br><br>
-	<p align = "right"> <%=(String)session.getAttribute("dorm") %> 세탁기 상태</p>
-	<table border="2" align="right">
-	<tr>
-		<td align ="center"> 세탁기 번호</td>
-		<td align ="center"> 세탁기 상태</td>
-			</tr>
-	<%	
-	request.setCharacterEncoding("UTF-8");
-	String ru_id = (String) session.getAttribute("id");
-	
-		try{
-		Class.forName("com.mysql.jdbc.Driver");
-		String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
-		conn = DriverManager.getConnection(jdbcurl,"root","root");
-		stmt = conn.createStatement();
-	
-		String sql = "select * from washingmachine where w_dorm = '"+dorm+"'";
-		rs = stmt.executeQuery(sql);
-		}
-		catch(Exception e){
-			out.println("DB 연동 오류입니다. : "+e.getMessage());
-		}
-		while(rs.next()){		
 		%>
-		
-		<tr>
-			<td align = "center"><%= rs.getString("w_id")%></td>	
-			<td align = "center"><%= rs.getString("state")%></td>
-		</tr>
+
+	</div>
+
+	<div id="jb-sidebarleft">
+
+		<form name="selection" action="/test3/reservation/reservation.jsp"
+			method="post" onsubmit="javascript:return choose('check')">
+			<img src="/test3/washingmachine.png" alt="세탁기 선택" width="100"
+				height="100" align="top"> 
+				<input type="radio" name="check"
+				value="1" align = "right">
+			<p id="fontfamly" align ="left">세탁기1</p>
+			<input type="submit" value="확인" id="fontfamly" align="right">
+		</form>
+	</div>
+	<div id="jb-sidebarright">
+
+		<p align="left">
+			<%=(String) session.getAttribute("dorm")+"의 세탁기 상태"%>
+		</p>
+		<table border="2">
+			<tr>
+				<td align="center" id="fontfamly">세탁기 번호</td>
+				<td align="center" id="fontfamly">세탁기 상태</td>
+			</tr>
+
+			<%
+				request.setCharacterEncoding("UTF-8");
+				String ru_id = (String) session.getAttribute("id");
+
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
+					conn = DriverManager.getConnection(jdbcurl, "root", "root");
+					stmt = conn.createStatement();
+
+					String sql = "select * from washingmachine where w_dorm = '"
+							+ dorm + "'";
+					rs = stmt.executeQuery(sql);
+				} catch (Exception e) {
+					out.println("DB 연동 오류입니다. : " + e.getMessage());
+				}
+				while (rs.next()) {
+			%>
+
+			<tr>
+				<td align="center" id="fontfamly"><%=rs.getString("w_id")%></td>
+				<td align="center" id="fontfamly"><%=rs.getString("state")%></td>
+			</tr>
 			<%
 				}
 			%>
@@ -103,42 +224,32 @@
 			stmt.close();
 			conn.close();
 		%>
-		</center>
-<script type = "text/javascript"> 
-function choose(check){
-	var radio = document.all(check);
-	var ischecked=false;
-	var i;
-	if(radio.length==null){
-		ischecked = radio.checked;
-	}
-	else
-		for(i=0; i<radio.length; i++){
-			if(radio[i].checked){
-				ischecked = true;
-				break;
+
+
+	</div>
+	<script type="text/javascript">
+		function choose(check) {
+			var radio = document.all(check);
+			var ischecked = false;
+			var i;
+			if (radio.length == null) {
+				ischecked = radio.checked;
+			} else
+				for (i = 0; i < radio.length; i++) {
+					if (radio[i].checked) {
+						ischecked = true;
+						break;
+					}
+				}
+
+			if (!ischecked) {
+				alert("세탁기를 선택해주세요.");
+				return false;
 			}
 		}
-	
-	if(!ischecked){
-		alert("세탁기를 선택해주세요.");
-		return false;
-	}
-}
-
-</script>
+	</script>
 
 
-<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post"  onsubmit="javascript:return choose('check')" >
 
-	<div align="left">	
-	<img src="/test3/washingmachine.png" alt="예약목록"width="150" height="150" align="top" > 
-	<input type = "radio" name = "check" value ="1"align="left">
-	<p>세탁기1 </p>
-	</div>
-	
-<div>
-<input type = "submit" value = "확인" align = "right" > </div>
-</form>
 </body>
 </html>

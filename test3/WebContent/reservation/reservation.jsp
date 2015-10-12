@@ -9,29 +9,218 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>예약 정보 입력</title>
+<style type="text/css" >
 
+
+#fontfamily{
+	font-family: HY엽서M;
+	}
+	
+table {border-collapse: collapse;
+border: 2px solid #B18904;  /*line color*/
+font: normal 80%/140% arial, helvetica, sans-serif;
+color: #000; /* top word's color*/
+background: #E8BD24;}  /*first attribute's list color*/
+
+td, th {border: 1px dotted #ABA877;  /*line color of table*/
+padding: .5em;
+}
+
+caption {
+text-align: left;
+font-size: 1.4em;
+font-weight: bold;
+text-transform: uppercase;
+color: #FB1B8B;
+background: transparent;}
+
+/* =links
+----------------------------------------------- */
+
+table a {padding: 1px;
+text-decoration: none;
+font-weight: bold;
+background: transparent;}
+
+table a:link {border-bottom: 1px dashed #ABA877;
+color: #FB1B8B;}
+
+table a:visited {border-bottom: 1px dashed #ABA877;
+text-decoration: line-through;
+color: #FB1B8B;}
+
+table a:hover {border-bottom: 1px dashed #ABA877;
+color: #FB1B8B;}
+
+/* =head =foot
+----------------------------------------------- */
+
+thead th, tfoot th {border: 2px solid #ABA877;
+text-align: left;
+font-size: 1.2em;
+font-weight: bold;
+color:#ABA877;
+background: transparent;}
+
+tfoot td {border: 2px solid #FB1B8B;}
+
+/* =body
+----------------------------------------------- */
+/*
+tbody th, tbody td {vertical-align: top;
+text-align: left;}
+
+tbody th {white-space: nowrap;}
+
+.odd {background: #fff;}
+
+tbody tr:hover {background: #AFC1F7;}*//*<---------------if you move to cursor on this table, the color will be changed*/
+
+
+#jb-header {
+	width: 270px;
+	float: top;
+	margin-left:10px;
+}
+
+#jb-sidebarleft {
+	width: 270px;
+	float: left;
+	margin-bottom: 10px;
+		margin-left:10px;
+	/*border: 1px solid #fff;*/
+}
+
+#jb-sidebarbottom {
+	width: 270px;
+	float: bottom;
+
+/*border: 1px solid #fff;*/
+}
+
+
+
+</style>
 </head>
-<body style="background-color:#CEE3F6">
-
-	<h2>
+<body style="background-color:#9BBAD8" >
+	
+	<h2 id="fontfamily">
 		<%
 			out.print((String) session.getAttribute("dorm"));	%>
 	</h2>
-	<h4>
+	
+	
+	<div id="jb-header">
+	<h4 id="fontfamily" align="center">
 	<%	out.print(request.getParameter("check")+"번 세탁기 예약하기"); %>
 	</h4>
-
-	<div>
-		<img src="/test3/colorwashingmachine.jpg" width="150" height="150"
-			align="top">
+		<img src="/test3/colorwashingmachine.jpg" width="200" height="200"
+			style="align:center; margin-left: 20px">
 	</div>
 
-	<center>
-		<table border="2" align="right">
+	<%
+		Calendar today = Calendar.getInstance();
+	%>
+	<div id="jb-sidebarleft">
+
+	<form name="selection" action="/test3/reservation/save.jsp" method="post"
+		onsubmit="javascript:return dontsubmit(this)">
+		<!--  <fieldset id="regbox" style="width:300; height:100">-->
+
+			<p id="fontfamily">예약 날짜</p>
+			<select id="fontfamily" name="year" style="align:left" onchange="constratints(form)" >
+				<%
+					String inDate= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
+					int year = Integer.parseInt(inDate);
+					for(int i =year; i<=year+1;i++){
+				%>
+				<option  id="fontfamily" value="<%=i%> " ><%=i%>년</option>
+				<%}%>
+			</select> 
+			<select id="fontfamily" name="month" style="align:left"  onchange="constratints(form)">
+				<option value=99>월</option>
+				<%
+					for (int i = 1; i <= 12; i++) {
+				%>
+				<option id="fontfamily" value="<%=i%>"><%=i%> 월
+				</option>
+				<%
+					}
+				%>
+			</select> 
+			<select id="fontfamily" name="day" style="align:left"  onchange="constratints(form)">
+				<option value=99>일</option>
+				<%
+					for(int i= 1; i<=31; i++) {
+					%>
+						<option id="fontfamily" value="<%=i%>"><%=i%> 일
+						</option><%
+					}
+				%>
+			</select>
+
+			<p id="fontfamily">시작 시간</p>
+			<select  id="fontfamily"name="start_time_h" onchange="constratints(form)">
+				<option  id="fontfamily"value=99>시</option>
+				<%
+					for (int i = 0; i <= 23; i++) {
+				%>
+				<option  id="fontfamily"value="<%=i%>"><%=i%> 시
+				</option>
+				<%
+					}
+				%>
+			</select> <select id="fontfamily" name="start_time_m" onchange="constratints(form)">
+				<option  id="fontfamily" value=99>분</option>
+				<option  id="fontfamily" value="0"><%="00"%> 분
+				</option>
+				<%
+				for (int i = 1; i <= 59; i++) {// for (int i = 10; i <= 59; i = i + 10)
+				%>
+				<option id="fontfamily" value="<%=i%>"><%=i%> 분
+				</option>
+				<%
+					}
+				%>
+			</select>
+
+			<p id="fontfamily">종료 시간</p>
+			<select name="end_time_h" onchange="constratints(form)">
+				<option id="fontfamily" value=99>시</option>
+				<%
+					for (int i = 0; i <= 23; i++) {
+				%>
+				<option  id="fontfamily" value="<%=i%>"><%=i%> 시
+				</option>
+				<%
+					}
+				%>
+			</select> <select id="fontfamily" name="end_time_m" onchange="constratints(form)" style="margin-right: 80px">
+				<option id="fontfamily" value=99>분</option>
+				<option id="fontfamily" value="0"><%="00"%> 분
+				</option>
+				<%
+				for(int i = 1; i <= 59; i++) { //for(int i = 10; i <= 59; i = i + 10)
+				%>
+				<option  id="fontfamily" value="<%=i%>"><%=i%> 분
+				</option>
+				<%
+					}
+				%>
+			</select> <input id="fontfamily" type="hidden" name="machine_num" value="<%=request.getParameter("check")%>"
+				align="left"> <input  id="fontfamily" type="submit" value="예약" align ="right">
+		<!--  </fieldset>-->
+
+	</form>
+	</div>
+	
+	<div id="jb-sidebarbottom">
+	<p id ="fontfamily" style= "margin-left:10px">예약 목록</p>
+		<table border="2" align="center">
 			<tr>
-				<td align="center">예약 날짜</td>
-				<td align="center">예약 시작 시간</td>
-				<td align="center">예약 종료 시간</td>
+				<td id="fontfamily"align="center">예약 날짜</td>
+				<td id="fontfamily"align="center">시작 시간</td>
+				<td id="fontfamily" align="center">종료 시간</td>
 			</tr>
 			<%
 				Connection conn = null;
@@ -40,7 +229,6 @@
 				request.setCharacterEncoding("UTF-8");
 				int rw_id = Integer.parseInt(request.getParameter("check"));
 				String dorm = (String) session.getAttribute("dorm");
-				out.print(rw_id + "번 세탁기 예약하기");
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
 					String jdbcurl = "jdbc:mysql://210.115.48.111:3306/washingmachine?useUnicode=true&characterEncoding=utf8";
@@ -57,9 +245,9 @@
 				while (rs.next()) {
 			%>
 			<tr>
-				<td align="center"><%=rs.getString("r_date")%></td>
-				<td align="center"><%=rs.getString("start_time")%></td>
-				<td align="center"><%=rs.getString("end_time")%></td>
+				<td id="fontfamily"align="center"><%=rs.getString("r_date")%></td>
+				<td id="fontfamily" align="center"><%=rs.getString("start_time")%></td>
+				<td id="fontfamily"align="center"><%=rs.getString("end_time")%></td>
 			</tr>
 			<%
 				}
@@ -70,7 +258,7 @@
 				conn.close();
 			%>
 		</table>
-	</center>
+	</div>
 
 	<script type="text/javascript">
 		function constratints(form) {
@@ -82,37 +270,32 @@
 
 			var hour_e = parseInt(form.end_time_h.options[form.end_time_h.selectedIndex].value);
 			var minute_e = parseInt(form.end_time_m.options[form.end_time_m.selectedIndex].value);
-			var years = new Date();
-			var months = new Date();
-			var days = new Date();
-			var hours_s = new Date();
-			var minutes_s = new Date();
-
+			var date = new Date();
 			var hour_s_2 = hour_s + 2;
 
-			if ((year<=years.getFullYear())&&(month < months.getMonth() + 1) && (month != 99)) {
-				alert("잘못된 날짜 선택입니다." + (months.getMonth() + 1)
+			if ((year<=date.getFullYear())&&(month < date.getMonth() + 1) && (month != 99)) {
+				alert("잘못된 날짜 선택입니다." + (date.getMonth() + 1)
 						+ "월 이후로 선택해주세요");
-			} else if ((year<=years.getFullYear())&&(month == months.getMonth() + 1)
-					&& (day < days.getDate()) && (day != 99) && (month != 99))
-				alert("잘못된 날짜 선택입니다." + (months.getMonth() + 1) + "월"
-						+ (days.getDate()) + "일 이후로 선택해주세요");
+			} else if ((year<=date.getFullYear())&&(month == date.getMonth() + 1)
+					&& (day < date.getDate()) && (day != 99) && (month != 99))
+				alert("잘못된 날짜 선택입니다." + (date.getMonth() + 1) + "월"
+						+ (date.getDate()) + "일 이후로 선택해주세요");
 
-			else if ((year<=years.getFullYear())&&(month == months.getMonth() + 1)
-					&& (day == days.getDate()) && (hour_s < hours_s.getHours())
+			else if ((year<=date.getFullYear())&&(month == date.getMonth() + 1)
+					&& (day == date.getDate()) && (hour_s < hours_s.getHours())
 					&& (day != 99) && (month != 99) && (hour_s != 99))
-				alert("잘못된 날짜 선택입니다." + (months.getMonth() + 1) + "월"
-						+ days.getDate() + "일" + hours_s.getHours() + "시 "
-						+ minutes_s.getMinutes() + "분 이후로 선택해주세요.");
+				alert("잘못된 날짜 선택입니다." + (date.getMonth() + 1) + "월"
+						+ date.getDate() + "일" + date.getHours() + "시 "
+						+ date.getMinutes() + "분 이후로 선택해주세요.");
 
-			else if ((year<=years.getFullYear())&&(month == months.getMonth() + 1)
-					&& (day == days.getDate())
-					&& (hour_s <= hours_s.getHours())
-					&& (minute_s <= minutes_s.getMinutes()) && (day != 99)
+			else if ((year<=date.getFullYear())&&(month == date.getMonth() + 1)
+					&& (day == date.getDate())
+					&& (hour_s <= date.getHours())
+					&& (minute_s <= date.getMinutes()) && (day != 99)
 					&& (month != 99) && (hour_s != 99) && (minute_s != 99))
-				alert("잘못된 날짜 선택입니다." + (months.getMonth() + 1) + "월"
-						+ days.getDate() + "일" + hours_s.getHours() + "시 "
-						+ minutes_s.getMinutes() + "분 이후로 선택해주세요.");
+				alert("잘못된 날짜 선택입니다." + (date.getMonth() + 1) + "월"
+						+ date.getDate() + "일" + date.getHours() + "시 "
+						+ date.getMinutes() + "분 이후로 선택해주세요.");
 
 			else if (((hour_e < hour_s) || (hour_e - hour_s > 2))
 					&& (day != 99) && (month != 99) && (hour_s != 99)
@@ -144,32 +327,27 @@
 
 			var hour_e = parseInt(form.end_time_h.options[form.end_time_h.selectedIndex].value);
 			var minute_e = parseInt(form.end_time_m.options[form.end_time_m.selectedIndex].value);
-			var years = new Date();
-			var months = new Date();
-			var days = new Date();
-			var hours_s = new Date();
-			var minutes_s = new Date();
-
+			var date = new Date();
 			var hour_s_2 = hour_s + 2;		
 		
-			if ((year==years.getFullYear()&&(month < months.getMonth() + 1) && (month != 99))
-					||((month == months.getMonth() + 1) && (day < days.getDate())
-							&& (day != 99) && (month != 99)&&(year==years.getFullYear()))
+			if ((year==date.getFullYear()&&(month < date.getMonth() + 1) && (month != 99))
+					||((month == date.getMonth() + 1) && (day < date.getDate())
+							&& (day != 99) && (month != 99)&&(year==date.getFullYear()))
 			
-					||((month == months.getMonth() + 1)
-							&& (day == days.getDate())
-							&& (hour_s < hours_s.getHours()) && (hour_s != 99)&&(year==years.getFullYear()))
+					||((month == date.getMonth() + 1)
+							&& (day == date.getDate())
+							&& (hour_s < date.getHours()) && (hour_s != 99)&&(date==years.getFullYear()))
 
-					||((month == months.getMonth() + 1)
-							&& (day == days.getDate()) && (day != 99)
-							&& (hour_s == hours_s.getHours())
-							&& (minute_s <= minutes_s.getMinutes())
-							&& (day != 99) && (month != 99) && (minute_s != 99) && (hour_s != 99)&&(year==years.getFullYear()))
+					||((month == date.getMonth() + 1)
+							&& (day == date.getDate()) && (day != 99)
+							&& (hour_s == date.getHours())
+							&& (minute_s <= date.getMinutes())
+							&& (day != 99) && (month != 99) && (minute_s != 99) && (hour_s != 99)&&(date==years.getFullYear()))
 
 					||(((hour_e < hour_s) || (hour_e - hour_s > 2))
 							&& (day != 99) && (month != 99) && (hour_s != 99)
-							&& (minute_s != 99) && (hour_e != 99)&&(year==years.getFullYear()))
-					||((minute_s != 99) &&(year==years.getFullYear())&& (hour_s != 99) && (hour_e == hour_s_2)&& (minute_e > minute_s) && (hour_e != 99) && (minute_e != 99))
+							&& (minute_s != 99) && (hour_e != 99)&&(year==date.getFullYear()))
+					||((minute_s != 99) &&(year==date.getFullYear())&& (hour_s != 99) && (hour_e == hour_s_2)&& (minute_e > minute_s) && (hour_e != 99) && (minute_e != 99))
 					|| ((month == 99) || (day == 99) || (hour_s == 99)|| (hour_e == 99) || (minute_s == 99) || (minute_e == 99))
 					||(((month==4)||(month==6)||(month==9)||(month==11))&& (day==31) && (day != 99) && (month != 99))
 					||((((year%4!=0)&&(day==29))||(year%4==0))&&(month==2)&&((day==30)||(day==31))&&(day!=99)&&(month!=99))){
@@ -178,99 +356,21 @@
 			}	
 		}
 	</script>
+
+<script type="text/javascript">
+
+jQuery(document).ready(function(){
+    
+    var select = $("select#color");
+    
+    select.change(function(){
+        var select_name = $(this).children("option:selected").text();
+        $(this).siblings("label").text(select_name);
+    });
+});
+
+</script>
 	
-	<%
-		Calendar today = Calendar.getInstance();
-	%>
-	
 
-	<form name="selection" action="/test3/reservation/save.jsp" method="post"
-		onsubmit="javascript:return dontsubmit(this)">
-		<fieldset id="regbox" style="width: 100">
-
-			<p>예약 날짜</p>
-			<select name="year" onchange="constratints(form)">
-				<%
-					String inDate= new java.text.SimpleDateFormat("yyyy").format(new java.util.Date());
-					int year = Integer.parseInt(inDate);
-					for(int i =year; i<=year+1;i++){
-				%>
-				<option value="<%=i%> " ><%=i%>년</option>
-				<%}%>
-			</select> <select name="month" onchange="constratints(form)">
-				<option value=99>월</option>
-				<%
-					for (int i = 1; i <= 12; i++) {
-				%>
-				<option value="<%=i%>"><%=i%> 월
-				</option>
-				<%
-					}
-				%>
-			</select> <select name="day" onchange="constratints(form)">
-				<option value=99>일</option>
-				<%
-					for (int i = 1; i <= 31; i++) {
-				%>
-				<option value="<%=i%>"><%=i%> 일
-				</option>
-				<%
-					}
-				%>
-			</select>
-
-			<p>예약시작</p>
-			<select name="start_time_h" onchange="constratints(form)">
-				<option value=99>시</option>
-				<%
-					for (int i = 0; i <= 23; i++) {
-				%>
-				<option value="<%=i%>"><%=i%> 시
-				</option>
-				<%
-					}
-				%>
-			</select> <select name="start_time_m" onchange="constratints(form)">
-				<option value=99>분</option>
-				<option value="0"><%="00"%> 분
-				</option>
-				<%
-				for (int i = 1; i <= 59; i++) {// for (int i = 10; i <= 59; i = i + 10)
-				%>
-				<option value="<%=i%>"><%=i%> 분
-				</option>
-				<%
-					}
-				%>
-			</select>
-
-			<p>예약 종료</p>
-			<select name="end_time_h" onchange="constratints(form)">
-				<option value=99>시</option>
-				<%
-					for (int i = 0; i <= 23; i++) {
-				%>
-				<option value="<%=i%>"><%=i%> 시
-				</option>
-				<%
-					}
-				%>
-			</select> <select name="end_time_m" onchange="constratints(form)">
-				<option value=99>분</option>
-				<option value="0"><%="00"%> 분
-				</option>
-				<%
-				for(int i = 1; i <= 59; i++) { //for(int i = 10; i <= 59; i = i + 10)
-				%>
-				<option value="<%=i%>"><%=i%> 분
-				</option>
-				<%
-					}
-				%>
-			</select> <input type="hidden" name="machine_num" value="<%=request.getParameter("check")%>"
-				align="left"> <input type="submit" value="예약">
-		</fieldset>
-
-	</form>
 </body>
 </html>

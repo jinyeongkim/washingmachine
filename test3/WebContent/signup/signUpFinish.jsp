@@ -6,8 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>가입 완료</title>
+
+<style type="text/css">
+
+#fontfamily{
+	font-family: HY엽서M;
+	}
+</style>
 </head>
-<body style="background-color: #CEE3F6">
+<body style="background-color: #9BBAD8">
 
 	<center>
 		<%
@@ -29,7 +36,7 @@
 
 		
 		 if (id.equals("")){
-		%><script>alert("아이디를 입력하세요.");
+		%><script >alert("아이디를 입력하세요.");
 		location.href='/test3/signup/signUp.jsp';</script>
 		<%}
 			else if (password.equals("")){
