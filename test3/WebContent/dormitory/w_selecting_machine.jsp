@@ -11,14 +11,15 @@
 #fontfamily{
 	font-family: HY엽서M;
 	}
-	table {border-collapse: collapse;
-border: 2px solid #4D6BE6;  /*line color*/
+table {border-collapse: collapse;
+border: 2px solid #B18904;  /*line color*/
 font: normal 80%/140% arial, helvetica, sans-serif;
-color: #fff; /* top word's color*/
-background: #0040FF;}  /*first attribute's list color*/
+color: #000; /* top word's color*/
+background: #E8BD24;}  /*first attribute's list color*/
 
-td, th {border: 1px dotted #bbb;
-padding: .5em;}
+td, th {border: 1px dotted #ABA877;  /*line color of table*/
+padding: .5em;
+}
 
 caption {padding: 0 0 .5em 0;
 text-align: left;
@@ -76,19 +77,24 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 }
 
 #jb-sidebarleft {
-	width: 100px;
-	padding: 5px;
+	width: 140px;
 	margin-right: 5px;
 	float: left;
-
 }
 
 #jb-sidebarright {
-	width: 160px;
-	margin-right: 5px;
+	width: 110px;
+	padding: 3px;
 	float: left;
 }
-
+#jb-sidebarradix{
+	width: 20px;
+	float: right;
+}
+#jb-sidebarpic{
+	width: 80px;
+	float: left;
+}
 
 </style>
 
@@ -96,16 +102,19 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 </head>
 <body style="background-color:#9BBAD8">
 <h2 id="fontfamily"><%out.print((String)session.getAttribute("dorm")); %></h2>
+<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" align="left" value="메인화면" style="margin-left:200px">
+
 
 <div id = "jb-header">
-<p id="fontfamily"  align = "right"> 예약자 목록 </p>
+<h4 id="fontfamily"  align = "center"> 예약자 목록 </h4>
+
 <table id="fontfamily" border="2" align="right">
 	<tr>
 	<td  id="fontfamily"align ="center">세탁기 번호</td>
 	<td id="fontfamily" align ="center">예약 날짜</td>
 		<td  id="fontfamily"align ="center">시작 시간</td>
 		<td  id="fontfamily"align ="center">종료 시간</td>
-		<td id="fontfamily" align ="center">건물</td>
+		<td id="fontfamily" align ="center"> 건물</td>
 	</tr>
 	<%
 	request.setCharacterEncoding("UTF-8");
@@ -149,29 +158,9 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 			conn.close();
 			%>
 		</div>
-<div id="jb-sidebarleft">
-<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post" 
-onsubmit="javascript:return choose('check')">
 
-	<div align="left">	
-	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="100" height="100" align="top" > 
-	<input type = "radio" name = "check" value ="1"align="left" >
-	<p id="fontfamily">세탁기1 </p>
-	</div>
-	
-	<div align="left">	
-	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="100" height="100" align="top" > 
-
-	<input type = "radio" name = "check"value ="2" align="left" >
-	<p id="fontfamily">세탁기2 </p>
-	</div>
-	
-	<input type = "submit" value = "확인" align = "middle" id="fontfamily" >
-</form>
-
-</div>
-<div id = "jb-sidebarright">
-	<p  id="fontfamily"align = "center"> <%=(String)session.getAttribute("dorm") %> 세탁기 상태</p>
+<div id = "jb-sidebarleft">
+	<h4  id="fontfamily"align = "center">세탁기 상태</h4>
 	<table border="2" align="center">
 	<tr>
 		<td id="fontfamily" align ="center"> 세탁기 번호</td>
@@ -208,7 +197,34 @@ onsubmit="javascript:return choose('check')">
 			stmt.close();
 			conn.close();
 		%>
+		
 </div>
+
+<div id="jb-sidebarright">
+<form name = "selection" action="/test3/reservation/reservation.jsp" method= "post" 
+onsubmit="javascript:return choose('check')">
+
+	<div id="jb-sidebarpic">	
+	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="80" height="80" align="top" > 
+	<p id="fontfamily" align="center">세탁기1</p>
+	<img src="/test3/colorwashingmachine.jpg" alt="예약목록"width="80" height="80" align="top" > 
+
+	<p id="fontfamily"align="center">세탁기2</p>
+	
+	</div>
+	
+	<div id="jb-sidebarradix">	
+	
+	<input type = "radio" name = "check" value ="1"align="left" style="margin-top:95px">
+	<input type = "radio" name = "check"value ="2" align="left" style="margin-top:120px">
+	</div>
+		
+	<input type = "submit" value = "확인" align = "middle" id="fontfamily" style="margin-left:70px">
+</form>
+
+</div>
+
+
 <script type = "text/javascript"> 
 function choose(check){
 	var radio = document.all(check);

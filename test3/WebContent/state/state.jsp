@@ -11,16 +11,15 @@
 #fontfamily{
 	font-family: HY엽서M;
 	}
-	
-		table {border-collapse: collapse;
-border: 2px solid #4D6BE6;  /*line color*/
+table {border-collapse: collapse;
+border: 2px solid #B18904;  /*line color*/
 font: normal 80%/140% arial, helvetica, sans-serif;
-color: #fff; /* top word's color*/
-background: #0040FF;}  /*first attribute's list color*/
+color: #000; /* top word's color*/
+background: #E8BD24;}  /*first attribute's list color*/
 
-td, th {border: 1px dotted #bbb;
-padding: .5em;}
-
+td, th {border: 1px dotted #ABA877;  /*line color of table*/
+padding: .5em;
+}
 caption {padding: 0 0 .5em 0;
 text-align: left;
 font-size: 1.4em;
@@ -72,17 +71,26 @@ tbody th {white-space: nowrap;}
 tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 	
 	
+#jb-header{
+	width:250px;
+	float:top;
+}	
+	
+	
+	
 </style>
 
 </head>
 <body style="background-color:#9BBAD8">
-<center>
-	<p id="fontfamily"align = "right"> <%=(String)session.getAttribute("dorm") %>  세탁기 상태</p> 
-	<table border="2" align="right">
+<div id="jb-header">
+	<h2 id="fontfamily"align = "left"> <%=(String)session.getAttribute("dorm") %></h2> 
+	<p id ="fontfamily" align= "center">세탁기 상태 </p>
+	<table border="2" align="center">
 	<tr>
 		<td id="fontfamily"align ="center"> 세탁기 번호</td>
 		<td id="fontfamily"align ="center"> 세탁기 상태</td>
 		<td id="fontfamily"align ="center"> 기숙사</td>
+		<td id="fontfamily"align ="center"> 남은 시간</td>
 			</tr>
 	<%
 		Connection conn = null;
@@ -108,6 +116,7 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 			<td id="fontfamily"align = "center"><%= rs.getString("w_id")%></td>	
 			<td id="fontfamily"align = "center"><%= rs.getString("state")%></td>
 			<td id="fontfamily"align = "center"><%= rs.getString("w_dorm")%></td> 
+			<td id="fontfamily"align = "center"><%= rs.getString("time")%></td> 
 		</tr>
 		<%
 		}
@@ -117,7 +126,7 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 			stmt.close();
 			conn.close();
 			%>		
-			<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" value="HOME" align="left">
-</center>
+	<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" value="HOME" align="right" style="margin-top:10px; margin-left:170px">
+</div>
 </body>
 </html>

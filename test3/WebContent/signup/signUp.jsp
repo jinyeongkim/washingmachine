@@ -16,7 +16,7 @@
 </head>
 
 <body style="background-color:#9BBAD8"><h2 id="fontfamily" style = "color:#086A87" >회원가입</h2>
-
+<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" align="left" value="메인화면" style="margin-left:200px">
 	<div style="left: 20px;">
 
 		<form name="signUp" action="/test3/signup/signUpFinish.jsp" method="post">

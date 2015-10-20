@@ -11,16 +11,14 @@
 	font-family: HY엽서M, 돋움;
 }
 
-table {
-	border-collapse: collapse;
-	border: 2px solid #4D6BE6; /*line color*/
-	font: normal 80%/140% arial, helvetica, sans-serif;
-	color: #fff; /* top word's color*/
-	background: #0040FF;
-} /*first attribute's list color*/
-td,th {
-	border: 1px dotted #bbb;
-	padding: .5em;
+table {border-collapse: collapse;
+border: 2px solid #B18904;  /*line color*/
+font: normal 80%/140% arial, helvetica, sans-serif;
+color: #000; /* top word's color*/
+background: #E8BD24;}  /*first attribute's list color*/
+
+td, th {border: 1px dotted #ABA877;  /*line color of table*/
+padding: .5em;
 }
 
 caption {
@@ -87,22 +85,28 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 #jb-header {
 	width: 270px;
 	float: top;
-	border: 3px solid #bcbcbc;
 }
 
 #jb-sidebarleft {
-	width: 100px;
-	padding: 5px;
+	width: 140px;
 	margin-right: 5px;
 	float: left;
-	border: 1px solid #fff;
 }
 
 #jb-sidebarright {
-	width: 155px;
-	margin-right: 5px;
+	width: 110px;
+	padding: 3px;
 	float: left;
-	border: 1px solid #fff;
+
+}
+#jb-sidebarradix{
+	width: 20px;
+	float: right;
+	
+}
+#jb-sidebarpic{
+	width: 80px;
+	float: left;
 }
 
 </style>
@@ -110,13 +114,15 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 </head>
 <body style="background-color: #9BBAD8">
 
-	<div id="jb-header">
+
 		<h2 id="fontfamly">
 			<%
 			out.print((String) session.getAttribute("dorm"));
 		%>
 		</h2>
-		<p align="center" id="fontfamly">예약자 목록</p>
+		<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" align="left" value="메인화면" style="margin-left:200px">
+			<div id="jb-header">
+		<h4 align="center" id="fontfamily">예약자 목록</h4>
 		<table id="fontfamly" border="2" align="center">
 			<tr>
 				<td align="center" id="fontfamly">세탁기 번호</td>
@@ -170,27 +176,14 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 
 	</div>
 
+	
 	<div id="jb-sidebarleft">
 
-		<form name="selection" action="/test3/reservation/reservation.jsp"
-			method="post" onsubmit="javascript:return choose('check')">
-			<img src="/test3/washingmachine.png" alt="세탁기 선택" width="100"
-				height="100" align="top"> 
-				<input type="radio" name="check"
-				value="1" align = "right">
-			<p id="fontfamly" align ="left">세탁기1</p>
-			<input type="submit" value="확인" id="fontfamly" align="right">
-		</form>
-	</div>
-	<div id="jb-sidebarright">
-
-		<p align="left">
-			<%=(String) session.getAttribute("dorm")+"의 세탁기 상태"%>
-		</p>
+		<h4 align="center" id="fontfamily">세탁기 상태</h4>
 		<table border="2">
 			<tr>
-				<td align="center" id="fontfamly">세탁기 번호</td>
-				<td align="center" id="fontfamly">세탁기 상태</td>
+				<td align="center" id="fontfamly">세탁기번호</td>
+				<td align="center" id="fontfamly">세탁기  상태</td>
 			</tr>
 
 			<%
@@ -227,6 +220,29 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 
 
 	</div>
+	
+	
+	<div id="jb-sidebarright">
+		
+		<form name="selection" action="/test3/reservation/reservation.jsp"
+			method="post" onsubmit="javascript:return choose('check')">
+			<div id="jb-sidebarpic">
+			<img src="/test3/colorwashingmachine.jpg" alt="세탁기 선택" width="80"
+				height="80" align="left"> 
+					
+				<h4 id="fontfamly" align="center">세탁기1</h4>
+				</div>
+				
+				<div id="jb-sidebarradix">
+				<input type="radio" name="check" value="1"  style= "margin-top:95px">
+				</div>
+			<input type="submit" value="확인" id="fontfamly" style= "margin-left:70px">
+		
+		</form>
+		</div>
+
+	
+	
 	<script type="text/javascript">
 		function choose(check) {
 			var radio = document.all(check);

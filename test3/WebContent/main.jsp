@@ -86,34 +86,30 @@ tbody th {white-space: nowrap;}
 .odd {background: #fff;}
 
 tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
-#st-header {
-	width: 100px;
-	padding: 5px;
-	float: left;
-	border: 1ps solid #fff;
-}
 
 #jb-sidebarleft {
-	width: 100px;
+	width: 120px;
 	padding: 10px;
-	margin-right: 5px;
 	float: left;
-	border: 1ps solid #fff;
 }
 
+#jb-header {
+	width: 310px;
+	height:30px;
+	float: top;
+}
+
+
 #jb-sidebarbutton {
-	width: 100px;
-	height: 300px;
-	padding:5px;
-	margin-top: 20px;
+	width: 160px;
+	height: 325px;
 	float: left;
-	border: 1ps solid #fff;
+
 }
 
 #jb-db {
-	width: 230px;
-	float: bottom;
-	border: 1ps solid #fff;
+	width: 310px;
+	float:bottom;
 }
 </style>
 </head>
@@ -125,7 +121,7 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 		<%Connection conn = null;
 			Statement stmt = null;
 			ResultSet rs = null;
-
+			
 			request.setCharacterEncoding("UTF-8");
 			String id = (String) session.getAttribute("id");
 			String dorm = (String) session.getAttribute("dorm");
@@ -140,9 +136,11 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 				out.println("DB 연동 오류입니다. : " + e.getMessage());
 			}
 			rs.next();
-			if (rs.getInt(1) == 0) {%>
+			int balance = rs.getInt(1);
+			if ( balance== 0) {%>
 				alert("잔액이 부족합니다. 새 카드를 구매하시길 바랍니다.");<%}
-			else if(rs.getInt(1)!=0){
+			
+			else if(balance!=0){
 				rs = stmt.executeQuery("select count(*) from reservation where ru_id ='"+ id + "'");
 				rs.next();
 				if (rs.getInt(1) == 0) {
@@ -151,7 +149,7 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 				<%} else if (dorm.equals("men")) {%>
 						location.href = '/test3/dormitory/m_selecting_machine.jsp';
 	<%}
-			} else if (rs.getInt(1) != 0) {%>
+			  }else if (rs.getInt(1) != 0) {%>
 					alert("이미 예약 내역이 있습니다.다른 예약을 원하신다면 예약 취소 후에 이용해주시길 바랍니다.");
 	<%}}
 
@@ -163,11 +161,20 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 	</script>
 	<div id="jb-header">
 			<input type="button" onclick="logout()" id="fontfamily" value="로그아웃"
-				align="left" style="margin-left: 10px;margin-right:40px">
+				align="left" style="margin-left: 10px;margin-right: 20px">
 			<input type="button"
 				onclick="window.location='/test3/state/list.jsp'" value="예약자 목록보기"
-				align="left" id="fontfamily">
+				align="right" id="fontfamily" style="margin-left: 10px;margin-right: 20px">
+				<input type="button"
+				onclick="balance()" value="잔액조회"
+				align="right" id="fontfamily">
 	</div>
+	<script type="text/javascript">
+		function balance(){
+			alert("잔액은 "+<%=balance%>+"입니다.");			
+		}
+	
+	</script>
 
 
 	<div id="jb-sidebarleft" align="left">
@@ -185,27 +192,28 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 	
 	<div id="jb-sidebarbutton">
 		<input type="button" onclick="constraint_count()" value="예약하기"
-			id="fontfamily" align="top"  style="padding:3px; margin-top:5px">
+			id="fontfamily" align="top"  style="padding:3px; margin-top:40px; margin-left:20px">
 
 		<input type="button"
 			onclick="window.location='/test3/cancel/cancel.jsp'" id="fontfamily"
-			value="예약취소하기" align="top" style="padding:3px; margin-top:80px">
+			value="예약취소하기" align="top" style="padding:3px; margin-top:80px; margin-left:20px">
 
 		<input type="button" id="fontfamily"
 			onclick="window.location='/test3/state/state.jsp'" value="세탁기 상태"
-			align="top" style="padding:3px; margin-top:80px">
+			align="top" style="padding:3px; margin-top:80px; margin-left:20px">
 	</div>
 
 
 
 	<div id="jb-db">
-	<p  id="fontfamily" align = "center">나의 예약정보</p>
+	<p  id="fontfamily" align="center" >나의 예약정보</p>
 	<table border="2" align="center">
 		<tr>
 			<td align="center" id="fontfamily">세탁기 번호</td>
-			<td align="center" id="fontfamily">예약 날짜</td>
-			<td align="center" id="fontfamily">시작 시간</td>
-			<td align="center" id="fontfamily">종료 시간</td>
+			<td align="center" id="fontfamily" >예약날짜</td>
+			<td align="center" id="fontfamily" >시작시간</td>
+			<td align="center" id="fontfamily" >종료시간</td>
+			<td align="center" id="fontfamily" >잔액</td>
 		</tr>
 		<%
 					request.setCharacterEncoding("UTF-8");
@@ -224,15 +232,19 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 					while (rs.next()) {
 				%>
 		<tr>
-			<td align="center" id="fontfamily"><%=rs.getString("rw_id")%></td>
-			<td align="center" id="fontfamily"><%=rs.getString("r_date")%></td>
-			<td align="center" id="fontfamily"><%=rs.getString("start_time")%></td>
-			<td align="center" id="fontfamily"><%=rs.getString("end_time")%></td>
+			<td align="center" id="fontfamily" style="font-size:12px; width:40px"><%=rs.getString("rw_id")%></td>
+			<td align="center" id="fontfamily" style="font-size:11px; width:50px"><%=rs.getString("r_date")%></td>
+			<td align="center" id="fontfamily" style="font-size:11px; width:50px"><%=rs.getString("start_time")%></td>
+			<td align="center" id="fontfamily" style="font-size:11px; width:50px"><%=rs.getString("end_time")%></td>
+			<td align="center" id="fontfamily" style="font-size:11px; width:30px"><%=balance%></td>
 		</tr>
 		<%
 					}
 				%>
+				
 	</table>
+	</div>
+	
 	<%
 			String inDate   = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 			String inTime  = new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
@@ -248,7 +260,7 @@ tbody tr:hover {background: #AFC1F7;}*/ /*<---------------action*/
 			conn.close();
 			%>
 	
-	</div>
+	
 	<script type="text/javascript">
 		function logout() {
 			var result = confirm("로그아웃 하시겠습니까?");

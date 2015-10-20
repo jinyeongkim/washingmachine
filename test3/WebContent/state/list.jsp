@@ -11,16 +11,15 @@
 #fontfamily{
 	font-family: HY엽서M;
 	}
-	
-		table {border-collapse: collapse;
-border: 2px solid #4D6BE6;  /*line color*/
+table {border-collapse: collapse;
+border: 2px solid #B18904;  /*line color*/
 font: normal 80%/140% arial, helvetica, sans-serif;
-color: #fff; /* top word's color*/
-background: #0040FF;}  /*first attribute's list color*/
+color: #000; /* top word's color*/
+background: #E8BD24;}  /*first attribute's list color*/
 
-td, th {border: 1px dotted #bbb;
-padding: .5em;}
-
+td, th {border: 1px dotted #ABA877;  /*line color of table*/
+padding: .5em;
+}
 caption {padding: 0 0 .5em 0;
 text-align: left;
 font-size: 1.4em;
@@ -71,20 +70,22 @@ tbody th {white-space: nowrap;}
 
 tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 	
-	
+#jb-header{
+	width:300px;
+}	
 	
 </style>
 
 </head>
 <body style="background-color:#9BBAD8">
-	<center>
-	<p id="fontfamily" align = "right"> 예약 목록</p>
-	<table id="fontfamily"border="2" align="right">
+	<div id="jb-header">
+	<h4 id="fontfamily" align = "center"> <%=(String)session.getAttribute("dorm")%> 예약 목록</h4>
+	<table id="fontfamily"border="2" align="left">
 	<tr>
-	<td id="fontfamily"align ="center"> 세탁기 번호</td>
-		<td id="fontfamily" align ="center"> 예약 날짜</td>
-		<td id="fontfamily"align ="center"> 예약 시작 시간</td>
-		<td id="fontfamily" align ="center"> 예약 종료 시간</td>
+	<td id="fontfamily"align ="center">세탁기 번호</td>
+		<td id="fontfamily" align ="center">예약 날짜</td>
+		<td id="fontfamily"align ="center">시작 시간</td>
+		<td id="fontfamily" align ="center">종료 시간</td>
 		
 			</tr>
 	<%
@@ -124,8 +125,8 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------action*/
 			stmt.close();
 			conn.close();
 			%>
-		<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" value="HOME" align="left">
-</center>
+		<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" value="메인화면" align="bottom" style="margin-left:235px;margin-top:10px">
+</div>
 
 
 

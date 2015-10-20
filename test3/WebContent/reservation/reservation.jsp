@@ -13,7 +13,7 @@
 
 
 #fontfamily{
-	font-family: HY엽서M;
+	fontfamily: HY엽서M;
 	}
 	
 table {border-collapse: collapse;
@@ -108,7 +108,7 @@ tbody tr:hover {background: #AFC1F7;}*//*<---------------if you move to cursor o
 		<%
 			out.print((String) session.getAttribute("dorm"));	%>
 	</h2>
-	
+	<input type="button" id="fontfamily" onclick="window.location='/test3/main.jsp'" align="left" value="메인화면" style="margin-left:200px">
 	
 	<div id="jb-header">
 	<h4 id="fontfamily" align="center">
